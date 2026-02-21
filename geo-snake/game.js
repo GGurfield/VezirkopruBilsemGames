@@ -295,3 +295,4 @@ window.onkeydown = (e) => {
     if (key === 'ArrowLeft' && dx === 0) { nextDx = -GRID_SIZE; nextDy = 0; }
     if (key === 'ArrowRight' && dx === 0) { nextDx = GRID_SIZE; nextDy = 0; }
 };
+
