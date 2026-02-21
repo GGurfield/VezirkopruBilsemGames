@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endless Runner</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="ui-layer">
+            <div id="hud" class="hidden">
+                <div id="lives-container">
+                    <!-- Hearts will be injected here -->
+                </div>
+                <div id="score-container">
+                    <span>HI: </span><span id="high-score">00000</span>
+                    <span>SCORE: </span><span id="current-score">00000</span>
+                </div>
+            </div>
+
+            <div id="start-screen" class="screen">
+                <h1>ENDLESS RUNNER</h1>
+                <p>Select Character:</p>
+                <div class="character-select">
+                    <div class="char-option selected" data-char="boy">BOY</div>
+                    <div class="char-option" data-char="girl">GIRL</div>
+                    <div class="char-option" data-char="cat">CAT</div>
+                </div>
+                <button id="start-btn">START GAME</button>
+            </div>
+
+            <div id="game-over-screen" class="screen hidden">
+                <h1>GAME OVER</h1>
+                <p>Score: <span id="final-score">0</span></p>
+                <button id="restart-btn">TRY AGAIN</button>
+            </div>
+
+            <div id="pause-screen" class="screen hidden">
+                <h1>PAUSED</h1>
+                <button id="resume-btn">RESUME</button>
+                <button id="pause-restart-btn">RESTART</button>
+            </div>
+
+            <button id="pause-btn" class="hidden">||</button>
+        </div>
+    </div>
+
+    <!-- Using type="module" to allow ES6 modules if needed, but keeping it simple for now -->
+    <script src="js/game.js"></script>
+</body>
+
+</html>
