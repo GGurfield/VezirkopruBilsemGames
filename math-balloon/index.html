@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematik Balon Patlatma</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="hud">
+            <div class="hud-item">
+                <span class="label">Puan:</span>
+                <span id="score" class="value">0</span>
+            </div>
+            <div class="hud-item">
+                <span class="label">Süre:</span>
+                <span id="timer" class="value">30</span>
+            </div>
+            <div id="streak-container" class="hud-item hidden">
+                <span class="label">Kombo!</span>
+                <div id="streak-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="balloon-area"></div>
+
+        <div id="start-screen" class="overlay">
+            <div class="content">
+                <h1>Matematik Balonları</h1>
+                <p>Balonları patlatmak için problemleri çöz!</p>
+                <div class="rules">
+                    <p>• Doğru cevap: +5 Puan & +5sn Bonus</p>
+                    <p>• 3 Üst üste doğru: +10 Bonus</p>
+                    <p>• Yanlış cevap: Balon patlar & 3sn Ceza</p>
+                </div>
+                <button id="start-btn">OYUNA BAŞLA</button>
+            </div>
+        </div>
+
+        <div id="game-over" class="overlay hidden">
+            <div class="content">
+                <h1>Oyun Bitti!</h1>
+                <p>Toplam Puanın:</p>
+                <div id="final-score" class="big-score">0</div>
+                <button id="restart-btn">TEKRAR DENE</button>
+            </div>
+        </div>
+
+        <div id="input-overlay" class="overlay hidden">
+            <div class="input-content">
+                <div id="active-problem">12 + 5 = ?</div>
+                <input type="number" id="answer-input" placeholder="Cevap..." autofocus>
+                <button id="submit-btn">Gönder</button>
+            </div>
+        </div>
+
+        <div id="penalty-overlay" class="overlay hidden">
+            <div class="penalty-content">
+                <div class="status">CEZA!</div>
+                <div id="penalty-timer">3</div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
