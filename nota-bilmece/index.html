@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota Bilmece - Piyano Oyunu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="game-container">
+        <header>
+            <h1>Nota Bilmece</h1>
+            <div class="stats">
+                <div class="stat-item" id="level-display">Seviye: <span>1</span></div>
+                <div class="stat-item" id="lives-display">Can: <span class="lives-icons">❤️❤️❤️</span></div>
+            </div>
+        </header>
+
+        <main>
+            <div id="game-status" class="status-panel">
+                <p id="status-text">Oyuna başlamak için butona basın!</p>
+                <div class="button-group">
+                    <button id="start-btn" class="primary-btn">Oyunu Başlat</button>
+                    <button id="replay-btn" class="secondary-btn hidden">Tekrar Dinle</button>
+                </div>
+            </div>
+
+            <div class="piano-container">
+                <div class="piano" id="piano">
+                    <!-- White keys -->
+                    <div class="key white" data-note="C4" id="key-C4"><span>C</span></div>
+                    <div class="key black" data-note="C#4" id="key-Cs4"></div>
+                    <div class="key white" data-note="D4" id="key-D4"><span>D</span></div>
+                    <div class="key black" data-note="D#4" id="key-Ds4"></div>
+                    <div class="key white" data-note="E4" id="key-E4"><span>E</span></div>
+                    <div class="key white" data-note="F4" id="key-F4"><span>F</span></div>
+                    <div class="key black" data-note="F#4" id="key-Fs4"></div>
+                    <div class="key white" data-note="G4" id="key-G4"><span>G</span></div>
+                    <div class="key black" data-note="G#4" id="key-Gs4"></div>
+                    <div class="key white" data-note="A4" id="key-A4"><span>A</span></div>
+                    <div class="key black" data-note="A#4" id="key-As4"></div>
+                    <div class="key white" data-note="B4" id="key-B4"><span>B</span></div>
+                    <div class="key white" data-note="C5" id="key-C5"><span>C</span></div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Duyduğun notayı bulmaya çalış! Her seviyede nota sayısı artar.</p>
+        </footer>
+    </div>
+
+    <div id="overlay" class="hidden">
+        <div class="modal">
+            <h2 id="modal-title">Oyun Bitti!</h2>
+            <p id="modal-message"></p>
+            <button id="restart-btn" class="primary-btn">Tekrar Dene</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
