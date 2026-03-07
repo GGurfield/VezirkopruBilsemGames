@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="label">SKOR:</span>
+                    <span id="score" class="value">000</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">EN YÜKSEK:</span>
+                    <span id="high-score" class="value">000</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">CAN:</span>
+                    <div id="lives" class="lives-container">
+                        <div class="heart">❤️</div>
+                        <div class="heart">❤️</div>
+                        <div class="heart">❤️</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas"></canvas>
+
+            <div id="overlay" class="overlay hidden">
+                <div class="overlay-content">
+                    <h1 id="overlay-title">OYUN SONU</h1>
+                    <p id="overlay-message">Skorun: <span id="final-score">0</span></p>
+                    <button id="restart-btn">Tekrar Oyna</button>
+                </div>
+            </div>
+
+            <div id="countdown" class="countdown hidden">3</div>
+        </div>
+    </div>
+
+    <div class="controls-hint">
+        Yön tuşlarını kullanarak yılanı kontrol et!
+    </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
