@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blind Random Chess</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Blind Random Chess</h1>
+            <p class="subtitle">Random placement. Hidden opponent. Total strategy.</p>
+        </header>
+
+        <main>
+            <div class="game-layout">
+                <div class="side-panel left">
+                    <div class="player-info white">
+                        <div class="avatar">W</div>
+                        <div class="details">
+                            <span class="name">Player</span>
+                            <span class="status">Your Turn</span>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button id="reset-game" class="btn secondary">Reset Game</button>
+                    </div>
+                </div>
+
+                <div class="board-container">
+                    <div id="chess-board" class="chess-board"></div>
+                </div>
+
+                <div class="side-panel right">
+                    <div class="player-info black">
+                        <div class="avatar">B</div>
+                        <div class="details">
+                            <span class="name">AI Opponent</span>
+                            <span class="status">Waiting...</span>
+                        </div>
+                    </div>
+                    <div class="markers-panel">
+                        <h3>Markers</h3>
+                        <p class="hint">Click a marker then an opponent square to guess.</p>
+                        <div class="marker-bank" id="marker-bank">
+                            <div class="marker-item" data-type="p" title="Pawn">♟</div>
+                            <div class="marker-item" data-type="n" title="Knight">♞</div>
+                            <div class="marker-item" data-type="b" title="Bishop">♝</div>
+                            <div class="marker-item" data-type="r" title="Rook">♜</div>
+                            <div class="marker-item" data-type="q" title="Queen">♛</div>
+                            <div class="marker-item" data-type="k" title="King">♚</div>
+                        </div>
+                        <button id="clear-markers" class="btn small">Clear All Markers</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="winner-text">White Wins!</h2>
+                <button id="play-again" class="btn primary">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
