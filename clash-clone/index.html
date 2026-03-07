@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash Arena - Strategy Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <!-- UI Overlay -->
+        <div id="ui-overlay">
+            <div id="top-bar">
+                <div class="player-info ai">
+                    <span class="name">AI OVERLORD</span>
+                    <div class="hp-bar enemy">
+                        <div class="fill" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bottom-bar">
+                <div id="elixir-container">
+                    <div id="elixir-bar">
+                        <div id="elixir-fill"></div>
+                    </div>
+                    <span id="elixir-count">0</span>
+                </div>
+
+                <div id="deck-wrapper">
+                    <div id="next-card-container">
+                        <span class="label">NEXT</span>
+                        <div id="next-card"></div>
+                    </div>
+                    <div id="card-hand">
+                        <!-- Cards will be injected here -->
+                    </div>
+                </div>
+
+                <div class="player-info player">
+                    <span class="name">COMMANDER</span>
+                    <div class="hp-bar player">
+                        <div class="fill" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Menu -->
+            <div id="menu-overlay" class="active">
+                <h1>CLASH ARENA</h1>
+                <p>Strategize. Deploy. Conquer.</p>
+                <div id="collection-screen">
+                    <h3>SELECT YOUR DECK (TAP 8)</h3>
+                    <div id="unit-collection">
+                        <!-- All units will be shown here for selection -->
+                    </div>
+                </div>
+                <button id="start-btn" class="disabled" disabled>SELECT 8 CARDS</button>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
