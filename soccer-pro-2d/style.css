@@ -1,0 +1,374 @@
+:root {
+    --bg-dark: #050a05;
+    --pitch-green: #0d2c0d;
+    --pitch-light: #1a4a1a;
+    --p1-color: #00d4ff;
+    --ai-color: #ff2d55;
+    --ball-color: #ffffff;
+    --text-color: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    max-width: 1200px;
+    max-height: 800px;
+    background:
+        linear-gradient(rgba(13, 44, 13, 0.8), rgba(13, 44, 13, 0.8)),
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255, 255, 255, 0.03) 80px, rgba(255, 255, 255, 0.03) 160px),
+        radial-gradient(circle at center, #1a4a1a, #0d2c0d);
+    border: 4px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+canvas {
+    image-rendering: pixelated;
+    display: block;
+}
+
+#ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#scoreboard {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    background-clip: padding-box;
+    backdrop-filter: blur(20px);
+    padding: 1.2rem 4rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.score {
+    font-size: 3.5rem;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: scoreEnter 0.5s ease-out;
+}
+
+@keyframes scoreEnter {
+    0% {
+        transform: translateY(-20px) scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.score.pulse {
+    animation: scorePulse 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scorePulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.team.p1 .score {
+    color: var(--p1-color);
+    text-shadow: 0 0 20px var(--p1-color);
+}
+
+.team.ai .score {
+    color: var(--ai-color);
+    text-shadow: 0 0 20px var(--ai-color);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+.team .name {
+    animation: pulse 3s infinite ease-in-out;
+}
+
+#status-text {
+    font-size: 4rem;
+    font-weight: 900;
+    text-shadow: 0 0 30px #fff, 0 0 50px var(--p1-color);
+    letter-spacing: 15px;
+    animation: goalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes goalPop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    transition: opacity 0.5s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+.content {
+    text-align: center;
+    max-width: 500px;
+}
+
+h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--p1-color), var(--ai-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+p {
+    font-size: 1.2rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+}
+
+#match-timer {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.tournament-settings {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.setting-group h3 {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+    opacity: 0.6;
+}
+
+.toggle-group {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.3rem;
+    border-radius: 50px;
+}
+
+.toggle-btn {
+    border: none !important;
+    padding: 0.6rem 1.2rem !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 1px !important;
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    box-shadow: none !important;
+    border-radius: 50px !important;
+}
+
+.toggle-btn.active {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+.stats-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 1.5rem 2.5rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-row span:first-child {
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+.stat-row span:last-child {
+    font-weight: 700;
+}
+
+.customizer {
+    margin-bottom: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.customizer h3 {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.color-options {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.color-opt {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.color-opt:hover {
+    transform: scale(1.2);
+}
+
+.color-opt.active {
+    border-color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px currentColor;
+}
+
+#win-screen .content h1 {
+    font-size: 6rem;
+    margin-bottom: 2rem;
+}
+
+.controls-guide {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.control-item span {
+    background: #fff;
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 900;
+    margin-right: 0.5rem;
+    box-shadow: 0 5px 0 #888;
+}
+
+button {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+button:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+}

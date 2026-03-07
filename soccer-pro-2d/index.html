@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soccer Pro 2D | Premium Futbol Deneyimi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="ui-overlay">
+            <div id="scoreboard">
+                <div class="team p1">
+                    <span class="name">OYUNCU</span>
+                    <span id="p1-score" class="score">0</span>
+                </div>
+                <div id="match-timer">02:00</div>
+                <div class="team ai">
+                    <span id="ai-score" class="score">0</span>
+                    <span class="name">YAPAY ZEKA</span>
+                </div>
+            </div>
+
+            <div id="message-container" class="hidden">
+                <h2 id="status-text">GOOOL!</h2>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="start-screen" class="overlay">
+            <div class="content">
+                <h1>SOCCER PRO 2D</h1>
+
+                <div class="tournament-settings">
+                    <div class="setting-group">
+                        <h3>ZORLUK</h3>
+                        <div id="difficulty-opts" class="toggle-group">
+                            <button class="toggle-btn active" data-diff="amateur">AMATÖR</button>
+                            <button class="toggle-btn" data-diff="pro">PRO</button>
+                            <button class="toggle-btn" data-diff="world">DÜNYA KUPASI</button>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>MAÇ SÜRESİ</h3>
+                        <div id="time-opts" class="toggle-group">
+                            <button class="toggle-btn" data-time="60">1 DK</button>
+                            <button class="toggle-btn active" data-time="120">2 DK</button>
+                            <button class="toggle-btn" data-time="300">5 DK</button>
+                            <button class="toggle-btn" data-time="0">SONSUZ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customizer">
+                    <h3>RENK SEÇ</h3>
+                    <div id="p1-colors" class="color-options">
+                        <div class="color-opt active" data-color="#00d4ff" style="background:#00d4ff"></div>
+                        <div class="color-opt" data-color="#00ff88" style="background:#00ff88"></div>
+                        <div class="color-opt" data-color="#ffcc00" style="background:#ffcc00"></div>
+                        <div class="color-opt" data-color="#ff00ff" style="background:#ff00ff"></div>
+                    </div>
+                </div>
+
+                <button id="start-btn">BAŞLA</button>
+            </div>
+        </div>
+
+        <div id="win-screen" class="overlay hidden">
+            <div class="content">
+                <h1 id="winner-text">KAZANDIN!</h1>
+
+                <div id="match-stats" class="stats-panel">
+                    <div class="stat-row"><span>Şutlar</span> <span id="stat-shots">0</span></div>
+                    <div class="stat-row"><span>Topla Oynama</span> <span id="stat-poss">50%</span></div>
+                    <div class="stat-row"><span>En Sert Şut</span> <span id="stat-kick">0</span></div>
+                </div>
+
+                <button id="restart-btn">TEKRAR OYNA</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>
