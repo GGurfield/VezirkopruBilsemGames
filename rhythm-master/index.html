@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhythm Nebula | Premium Rhythm Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div id="background-fx"></div>
+
+        <header id="game-hud">
+            <div class="hud-left">
+                <h1 class="logo">RHYTHM <span>NEBULA</span></h1>
+            </div>
+            <div class="hud-right">
+                <div class="score-container">
+                    <span class="label">SKOR</span>
+                    <span id="score-val">0000000</span>
+                </div>
+                <div class="combo-container">
+                    <span class="label">KOMBO</span>
+                    <span id="combo-val">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main id="game-container">
+            <canvas id="game-canvas"></canvas>
+
+            <div id="judgment-display"></div>
+
+            <div id="start-screen" class="overlay">
+                <div class="glass-panel">
+                    <h2>RHYTHM NEBULA</h2>
+                    <p>Müziğin ritmine kapıl. Hedefleri tam zamanında vur.</p>
+                    <div class="controls-hint">
+                        <div class="key">A</div>
+                        <div class="key">F</div>
+                        <div class="key">H</div>
+                        <div class="key">L</div>
+                    </div>
+                    <button id="start-btn" class="premium-btn">OYUNA BAŞLA</button>
+                </div>
+            </div>
+
+            <div id="game-over-screen" class="overlay hidden">
+                <div class="glass-panel">
+                    <h2>OYUN BİTTİ</h2>
+                    <div class="final-stats">
+                        <p>Toplam Skor: <span id="final-score">0</span></p>
+                        <p>Maksimum Kombo: <span id="max-combo">0</span></p>
+                    </div>
+                    <button id="restart-btn" class="premium-btn">TEKRAR DENE</button>
+                </div>
+            </div>
+        </main>
+
+        <footer id="interaction-bar">
+            <div class="lane-label">A</div>
+            <div class="lane-label">F</div>
+            <div class="lane-label">H</div>
+            <div class="lane-label">L</div>
+        </footer>
+    </div>
+    <!-- Script at the bottom to ensure DOM is ready -->
+    <script src="game.js"></script>
+</body>
+
+</html>
