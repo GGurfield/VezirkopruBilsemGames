@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASD Oyun Ortamı</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stats-container">
+        <div class="level-display">Seviye: <span id="level">1</span></div>
+        <div class="score-display">Skor: <span id="score">0</span></div>
+    </div>
+    <p>Hareket etmek için klavyenizdeki <strong>W, A, S, D</strong> veya <strong>Yön Tuşlarını</strong> kullanın.</p>
+    <div class="key-indicator">
+        <div class="key" id="key-w">W</div>
+        <div class="keys-row">
+            <div class="key" id="key-a">A</div>
+            <div class="key" id="key-s">S</div>
+            <div class="key" id="key-d">D</div>
+        </div>
+    </div>
+    </div>
+
+    <div id="game-container">
+        <div class="arena" id="arena">
+            <div class="player" id="player"></div>
+        </div>
+        <div id="minimap"></div>
+    </div>
+
+    <div id="game-overlay" class="overlay hidden">
+        <div class="overlay-content">
+            <h2 id="overlay-title">Seviye Tamamlandı!</h2>
+            <p id="overlay-message">Tebrikler! Bir sonraki seviyeye geçmeye hazır mısın?</p>
+            <button id="overlay-button">Sonraki Seviye</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
