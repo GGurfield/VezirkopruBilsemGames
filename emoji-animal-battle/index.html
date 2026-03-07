@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Animal Battle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <header>
+            <h1>🐾 EMOJI ANIMAL BATTLE</h1>
+            <div id="turn-indicator">1. Oyuncu: Hayvanlarını Seç</div>
+        </header>
+
+        <main id="setup-screen">
+            <div class="selection-section">
+                <div class="biome-filters">
+                    <button class="filter-btn active" data-biome="ALL">Hepsi</button>
+                    <button class="filter-btn" data-biome="FOREST">Orman 🌲</button>
+                    <button class="filter-btn" data-biome="FIRE">Ateş 🔥</button>
+                    <button class="filter-btn" data-biome="OCEAN">Okyanus 🌊</button>
+                    <button class="filter-btn" data-biome="ICE">Buz ❄️</button>
+                    <button class="filter-btn" data-biome="SAVANNAH">Savan 🌾</button>
+                    <button class="filter-btn" data-biome="MOUNTAIN">Dağ 🏔️</button>
+                    <button class="filter-btn" data-biome="DESERT">Çöl 🌵</button>
+                    <button class="filter-btn" data-biome="SWAMP">Bataklık 🐊</button>
+                    <button class="filter-btn" data-biome="SKY">Gökyüzü ☁️</button>
+                </div>
+                <div id="animal-list" class="animal-grid">
+                    <!-- Animals will be injected here -->
+                </div>
+            </div>
+
+            <div class="player-selection">
+                <h3>Senin Takımın (En fazla 3)</h3>
+                <div id="selected-team" class="team-slots">
+                    <div class="slot" data-index="0"></div>
+                    <div class="slot" data-index="1"></div>
+                    <div class="slot" data-index="2"></div>
+                </div>
+                <button id="ready-btn" class="primary-btn" disabled>HAZIRIM!</button>
+            </div>
+        </main>
+
+        <section id="arena-screen" class="hidden">
+            <div id="arena-background"></div>
+            <div class="battle-area">
+                <div id="player1-side" class="battle-side">
+                    <div class="team-render" id="p1-render"></div>
+                    <div class="player-info">1. Oyuncu</div>
+                </div>
+
+                <div class="vs-divider">VS</div>
+
+                <div id="player2-side" class="battle-side">
+                    <div class="team-render" id="p2-render"></div>
+                    <div class="player-info">2. Oyuncu</div>
+                </div>
+            </div>
+            <div id="battle-log">
+                <div class="log-content"></div>
+            </div>
+            <div class="arena-controls">
+                <button id="start-battle-btn" class="primary-btn">SAVAŞI BAŞLAT!</button>
+                <button id="restart-btn" class="secondary-btn hidden">YENİDEN OYNA</button>
+            </div>
+        </section>
+
+        <div id="overlay" class="hidden">
+            <div class="overlay-content">
+                <h2 id="overlay-msg">Sıradaki Oyuncu...</h2>
+                <button id="overlay-btn" class="primary-btn">DEVAM ET</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
