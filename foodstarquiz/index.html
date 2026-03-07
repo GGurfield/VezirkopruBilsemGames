@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yıldız Yemek Testi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="sky-container"></div>
+
+    <div id="ui-layer">
+        <div class="stats-panel">
+            <div class="stat">Puan: <strong id="score">0</strong></div>
+            <div class="stat">Seri: <strong id="streak">0</strong> <span id="streak-fire"></span></div>
+            <div class="stat" title="Kalan toplam süreniz">Süre: <strong id="time-limit-display">20.0s</strong></div>
+        </div>
+    </div>
+
+    <div id="start-screen" class="overlay">
+        <div class="start-modal">
+            <h1>Yıldız Yemek Testi</h1>
+            <p>Kayan yıldızlara tıkla, yemekleri bil!</p>
+            <ul>
+                <li>Doğru cevap: <strong>+3 Puan</strong></li>
+                <li>3'lü Doğru Serisi: <strong>+2 Puan Bonus</strong></li>
+                <li>Hızlı ol: Her doğru serinde süre 0.5sn azalır!</li>
+                <li>Yanlış cevap: Puan ve seri <strong>sfırlanır</strong>!</li>
+            </ul>
+            <button id="start-btn" class="primary-btn">Oyuna Başla</button>
+        </div>
+    </div>
+
+    <div id="quiz-modal" class="hidden overlay">
+        <div class="modal-content">
+            <h2 id="question-text">Bu lezzet hangi ülkeye ait?</h2>
+
+            <div class="food-display">
+                <div id="food-emoji" class="emoji-display">🍔</div>
+                <div id="food-name">Hamburger</div>
+            </div>
+
+            <div id="options-grid">
+                <!-- Buttons will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
