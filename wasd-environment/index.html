@@ -13,21 +13,114 @@
     <div class="stats-container">
         <div class="level-display">Seviye: <span id="level">1</span></div>
         <div class="score-display">Skor: <span id="score">0</span></div>
-    </div>
-    <p>Hareket etmek için klavyenizdeki <strong>W, A, S, D</strong> veya <strong>Yön Tuşlarını</strong> kullanın.</p>
-    <div class="key-indicator">
-        <div class="key" id="key-w">W</div>
-        <div class="keys-row">
-            <div class="key" id="key-a">A</div>
-            <div class="key" id="key-s">S</div>
-            <div class="key" id="key-d">D</div>
+
+        <div class="respawn-display hidden" id="respawn-p1" style="color:#38bdf8; margin-left: 20px;">1. Oyuncu Doğuyor:
+            <span>10</span>
+        </div>
+        <div class="respawn-display hidden" id="respawn-p2" style="color:#f43f5e; margin-left: 20px;">2. Oyuncu Doğuyor:
+            <span>10</span>
         </div>
     </div>
+
+    <p style="margin-bottom: 5px;">Hareket etmek için klavyenizi kullanın. Menüden oyuncu sayısını seçin.</p>
+    <div class="controls-container hidden" id="controls-container">
+        <div class="key-indicator" id="controls-p1">
+            <div id="p1-label" style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px;">Kontroller</div>
+            <div class="key" id="key-w">W</div>
+            <div class="keys-row">
+                <div class="key" id="key-a">A</div>
+                <div class="key" id="key-s">S</div>
+                <div class="key" id="key-d">D</div>
+            </div>
+        </div>
+        <div class="key-indicator hidden" id="controls-p2">
+            <div id="p2-label" style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px;">2. Oyuncu (Yön Tuşları)
+            </div>
+            <div class="key" id="key-up">↑</div>
+            <div class="keys-row">
+                <div class="key" id="key-left">←</div>
+                <div class="key" id="key-down">↓</div>
+                <div class="key" id="key-right">→</div>
+            </div>
+        </div>
     </div>
 
+    <button id="pause-btn" class="pause-button" title="Duraklat (ESC)">⏸️</button>
+
     <div id="game-container">
+        <div id="main-menu" class="overlay">
+            <div class="overlay-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <div
+                        style="color: #fbbf24; font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; gap: 5px;">
+                        <div
+                            style="width: 15px; height: 15px; background: #fbbf24; border-radius: 50%; display: inline-block;">
+                        </div>
+                        <span id="menu-total-coins">0</span>
+                    </div>
+                    <button id="shop-btn" class="menu-button"
+                        style="padding: 10px 20px; width: auto; font-size: 1rem; background: linear-gradient(135deg, #8b5cf6, #6d28d9);">MAĞAZA</button>
+                </div>
+
+                <h1 style="margin-bottom: 1.5rem; font-size: 2.2rem;">WASD Oyun Ortamı</h1>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 1.5rem;">
+                    <input type="text" id="p1-name-input" class="name-input" placeholder="1. Oyuncu İsmi"
+                        value="Oyuncu 1" maxlength="12">
+                    <input type="text" id="p2-name-input" class="name-input" placeholder="2. Oyuncu İsmi"
+                        value="Oyuncu 2" maxlength="12">
+                </div>
+
+                <button class="menu-button" id="btn-1p">1 OYUNCU</button>
+                <div style="height: 15px;"></div>
+                <button class="menu-button" id="btn-2p" style="background: linear-gradient(135deg, #f43f5e, #e11d48);">2
+                    OYUNCU</button>
+            </div>
+        </div>
+
+        <div id="shop-overlay" class="overlay hidden" style="z-index: 3000;">
+            <div class="overlay-content">
+                <h2 style="color: #fff; margin-bottom: 10px;">MAĞAZA (KOSTÜMLER)</h2>
+                <div
+                    style="color: #fbbf24; font-weight: bold; font-size: 1.2rem; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 5px;">
+                    <div style="width: 15px; height: 15px; background: #fbbf24; border-radius: 50%;"></div>
+                    <span id="shop-total-coins">0</span>
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+                    <button class="menu-button active-tab" id="shop-tab-p1"
+                        style="padding: 10px; width: auto; background: linear-gradient(135deg, #38bdf8, #0ea5e9);">1.
+                        Oyuncu İçin</button>
+                    <button class="menu-button" id="shop-tab-p2"
+                        style="padding: 10px; width: auto; background: transparent; border: 2px solid #38bdf8;">2.
+                        Oyuncu İçin</button>
+                </div>
+
+                <div class="shop-categories-container"
+                    style="display: flex; flex-direction: row; gap: 30px; width: 100%; justify-content: center;">
+                    <div class="shop-category">
+                        <h3
+                            style="color: #cbd5e1; margin-bottom: 10px; border-bottom: 1px solid #334155; padding-bottom: 5px;">
+                            KOSTÜMLER</h3>
+                        <div id="shop-skins-container" class="shop-items-grid"></div>
+                    </div>
+
+                    <div class="shop-category">
+                        <h3
+                            style="color: #cbd5e1; margin-bottom: 10px; border-bottom: 1px solid #334155; padding-bottom: 5px;">
+                            İSİM STİLLERİ</h3>
+                        <div id="shop-names-container" class="shop-items-grid"></div>
+                    </div>
+                </div>
+
+                <button id="close-shop-btn" class="menu-button"
+                    style="margin-top: 20px; background: linear-gradient(135deg, #64748b, #334155);">KAPAT</button>
+            </div>
+        </div>
+
         <div class="arena" id="arena">
-            <div class="player" id="player"></div>
+            <div class="player p1 hidden" id="player1"></div>
+            <div class="player p2 hidden" id="player2"></div>
         </div>
         <div id="minimap"></div>
     </div>
@@ -38,6 +131,21 @@
             <p id="overlay-message">Tebrikler! Bir sonraki seviyeye geçmeye hazır mısın?</p>
             <button id="overlay-button">Sonraki Seviye</button>
         </div>
+    </div>
+
+    <div id="pause-overlay" class="overlay hidden">
+        <div class="overlay-content" style="display: flex; flex-direction: column; gap: 15px;">
+            <h2 style="color: #fff; margin-bottom: 10px;">OYUN DURAKLATILDI</h2>
+            <button id="resume-btn" class="menu-button" style="margin-top: 10px;">Oyuna Devam Et</button>
+            <button id="restart-btn" class="menu-button"
+                style="background: linear-gradient(135deg, #f59e0b, #b45309);">Tekrar Oyna</button>
+            <button id="mainmenu-btn" class="menu-button"
+                style="background: linear-gradient(135deg, #ef4444, #991b1b);">Menüye Dön</button>
+        </div>
+    </div>
+
+    <div id="countdown-overlay" class="overlay hidden" style="z-index: 4000;">
+        <div class="countdown-text" id="countdown-text">3</div>
     </div>
 
     <script src="game.js"></script>
