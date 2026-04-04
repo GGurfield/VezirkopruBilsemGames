@@ -1,0 +1,226 @@
+:root {
+    --bg-color: #0f172a;
+    --panel-bg: rgba(15, 23, 42, 0.85);
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --text-color: #f8fafc;
+    --grid-line: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka', sans-serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-color);
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+}
+
+#game-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Let clicks pass through to canvas when possible */
+}
+
+/* UI Elements need pointer events */
+#ui-layer > * {
+    pointer-events: auto;
+}
+
+#score-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: var(--panel-bg);
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+#leaderboard {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--panel-bg);
+    padding: 15px;
+    border-radius: 12px;
+    color: var(--text-color);
+    width: 220px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+#leaderboard h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #94a3b8;
+}
+
+#leaderboard-list {
+    list-style: none;
+    font-size: 0.95rem;
+}
+
+#leaderboard-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+#leaderboard-list li:last-child {
+    border-bottom: none;
+}
+
+#leaderboard-list li.player-row {
+    color: #60a5fa;
+    font-weight: bold;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.panel {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    animaton: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.panel h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(96, 165, 250, 0.3);
+}
+
+.panel h2 {
+    font-size: 2.5rem;
+    color: #ef4444;
+    margin-bottom: 15px;
+}
+
+.panel p {
+    color: #cbd5e1;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 25px;
+    background: rgba(0,0,0,0.2);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: white;
+    font-size: 1.1rem;
+    font-family: 'Fredoka', sans-serif;
+    outline: none;
+    transition: all 0.2s;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+}
+
+.btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+#minimap-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 150px;
+    height: 150px;
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+#minimap-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
