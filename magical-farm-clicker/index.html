@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sihirli Çiftlik Oyunu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+
+        <!-- Top Bar -->
+        <header class="glass-panel main-header">
+            <div class="logo">🌾 Sihirli Çiftlik</div>
+            <div class="balance-container">
+                <span class="currency-icon">🪙</span>
+                <span id="money-display">0</span> TL
+            </div>
+        </header>
+
+        <main class="game-grid">
+
+            <!-- Clicker Section -->
+            <section class="glass-panel clicker-section">
+                <h2>Gelir Çanı</h2>
+                <div class="bell-container" id="bell-container">
+                    <div id="bell" class="bell-icon">🔔</div>
+                </div>
+                <p class="hint">Tıkla ve 1 TL Kazan!</p>
+            </section>
+
+            <!-- Store Section -->
+            <section class="glass-panel store-section">
+                <h2>Hayvan Pazarı</h2>
+                <div class="store-grid">
+                    <button class="store-btn" id="buy-chicken" data-cost="25">
+                        <div class="btn-icon">🐔</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Tavuk</span>
+                            <span class="btn-cost">25 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-chicken">0</span></div>
+                    </button>
+
+                    <button class="store-btn" id="buy-rooster" data-cost="35">
+                        <div class="btn-icon">🐓</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Horoz</span>
+                            <span class="btn-cost">35 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-rooster">0</span></div>
+                    </button>
+
+                    <button class="store-btn" id="buy-sheep" data-cost="40">
+                        <div class="btn-icon">🐑</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Koyun</span>
+                            <span class="btn-cost">40 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-sheep">0</span></div>
+                    </button>
+
+                    <button class="store-btn" id="buy-cow" data-cost="48">
+                        <div class="btn-icon">🐄</div>
+                        <div class="btn-info">
+                            <span class="btn-name">İnek</span>
+                            <span class="btn-cost">48 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-cow">0</span></div>
+                    </button>
+
+                    <button class="store-btn" id="buy-goat" data-cost="60">
+                        <div class="btn-icon">🐐</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Keçi</span>
+                            <span class="btn-cost">60 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-goat">0</span></div>
+                    </button>
+
+                    <button class="store-btn" id="buy-buffalo" data-cost="120">
+                        <div class="btn-icon">🐃</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Manda</span>
+                            <span class="btn-cost">120 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-buffalo">0</span></div>
+                    </button>
+
+                    <button class="store-btn" id="buy-bull" data-cost="200">
+                        <div class="btn-icon">🐂</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Boğa</span>
+                            <span class="btn-cost">200 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-bull">0</span></div>
+                    </button>
+
+                    <button class="store-btn" id="buy-horse" data-cost="300">
+                        <div class="btn-icon">🐎</div>
+                        <div class="btn-info">
+                            <span class="btn-name">At</span>
+                            <span class="btn-cost">300 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-horse">0</span></div>
+                    </button>
+
+                    <button class="store-btn" id="buy-donkey" data-cost="100">
+                        <div class="btn-icon">🫏</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Eşek</span>
+                            <span class="btn-cost">100 TL</span>
+                        </div>
+                        <div class="btn-count">Sahip: <span id="count-donkey">0</span></div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Feed Store Section -->
+            <section class="glass-panel store-section">
+                <h2>Yem Pazarı (10 Adet)</h2>
+                <div class="store-grid">
+                    <button class="store-btn feed-btn" id="buy-feed-chicken" data-cost="5">
+                        <div class="btn-icon">🌾</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Tavuk Yemi</span>
+                            <span class="btn-cost">5 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-chicken">0</span></div>
+                    </button>
+                    <button class="store-btn feed-btn" id="buy-feed-rooster" data-cost="5">
+                        <div class="btn-icon">🌾</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Horoz Yemi</span>
+                            <span class="btn-cost">5 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-rooster">0</span></div>
+                    </button>
+                    <button class="store-btn feed-btn" id="buy-feed-sheep" data-cost="10">
+                        <div class="btn-icon">🌿</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Koyun Yemi</span>
+                            <span class="btn-cost">10 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-sheep">0</span></div>
+                    </button>
+                    <button class="store-btn feed-btn" id="buy-feed-cow" data-cost="20">
+                        <div class="btn-icon">🌿</div>
+                        <div class="btn-info">
+                            <span class="btn-name">İnek Yemi</span>
+                            <span class="btn-cost">20 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-cow">0</span></div>
+                    </button>
+                    <button class="store-btn feed-btn" id="buy-feed-goat" data-cost="15">
+                        <div class="btn-icon">🌿</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Keçi Yemi</span>
+                            <span class="btn-cost">15 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-goat">0</span></div>
+                    </button>
+                    <button class="store-btn feed-btn" id="buy-feed-buffalo" data-cost="40">
+                        <div class="btn-icon">🌿</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Manda Yemi</span>
+                            <span class="btn-cost">40 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-buffalo">0</span></div>
+                    </button>
+                    <button class="store-btn feed-btn" id="buy-feed-bull" data-cost="50">
+                        <div class="btn-icon">🌿</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Boğa Yemi</span>
+                            <span class="btn-cost">50 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-bull">0</span></div>
+                    </button>
+                    <button class="store-btn feed-btn" id="buy-feed-horse" data-cost="80">
+                        <div class="btn-icon">🥕</div>
+                        <div class="btn-info">
+                            <span class="btn-name">At Yemi</span>
+                            <span class="btn-cost">80 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-horse">0</span></div>
+                    </button>
+                    <button class="store-btn feed-btn" id="buy-feed-donkey" data-cost="30">
+                        <div class="btn-icon">🥕</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Eşek Yemi</span>
+                            <span class="btn-cost">30 TL</span>
+                        </div>
+                        <div class="btn-count">Kalan: <span id="count-feed-donkey">0</span></div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Upgrades / Shelters -->
+            <section class="glass-panel upgrades-section">
+                <h2>Kulübeler (x2 Hız)</h2>
+                <div class="store-grid">
+                    <button class="store-btn upgrade-btn" id="buy-shelter-chicken" data-cost="100">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Kümes (Tavuk)</span>
+                            <span class="btn-cost">100 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-chicken">Yok</div>
+                    </button>
+
+                    <button class="store-btn upgrade-btn" id="buy-shelter-rooster" data-cost="120">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Kümes (Horoz)</span>
+                            <span class="btn-cost">120 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-rooster">Yok</div>
+                    </button>
+
+                    <button class="store-btn upgrade-btn" id="buy-shelter-sheep" data-cost="150">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Ağıl</span>
+                            <span class="btn-cost">150 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-sheep">Yok</div>
+                    </button>
+
+                    <button class="store-btn upgrade-btn" id="buy-shelter-cow" data-cost="200">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Ahır (İnek)</span>
+                            <span class="btn-cost">200 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-cow">Yok</div>
+                    </button>
+
+                    <button class="store-btn upgrade-btn" id="buy-shelter-goat" data-cost="250">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Ahır (Keçi)</span>
+                            <span class="btn-cost">250 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-goat">Yok</div>
+                    </button>
+
+                    <button class="store-btn upgrade-btn" id="buy-shelter-buffalo" data-cost="400">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Ahır (Manda)</span>
+                            <span class="btn-cost">400 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-buffalo">Yok</div>
+                    </button>
+
+                    <button class="store-btn upgrade-btn" id="buy-shelter-bull" data-cost="600">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Ahır (Boğa)</span>
+                            <span class="btn-cost">600 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-bull">Yok</div>
+                    </button>
+
+                    <button class="store-btn upgrade-btn" id="buy-shelter-horse" data-cost="800">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Ahır (At)</span>
+                            <span class="btn-cost">800 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-horse">Yok</div>
+                    </button>
+
+                    <button class="store-btn upgrade-btn" id="buy-shelter-donkey" data-cost="300">
+                        <div class="btn-icon">🛖</div>
+                        <div class="btn-info">
+                            <span class="btn-name">Ahır (Eşek)</span>
+                            <span class="btn-cost">300 TL</span>
+                        </div>
+                        <div class="btn-count" id="has-shelter-donkey">Yok</div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Inventory / Sell -->
+            <section class="glass-panel inventory-section">
+                <h2>Depo & Satış</h2>
+                <div class="inventory-grid">
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">🥚</div>
+                            <div class="inv-details">
+                                <span class="inv-name">Yumurta</span>
+                                <span class="inv-amount" id="inv-egg">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-egg">Sat (+3 TL)</button>
+                    </div>
+
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">🪶</div>
+                            <div class="inv-details">
+                                <span class="inv-name">Tüy</span>
+                                <span class="inv-amount" id="inv-feather">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-feather">Sat (+6 TL)</button>
+                    </div>
+
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">🧶</div>
+                            <div class="inv-details">
+                                <span class="inv-name">Yün</span>
+                                <span class="inv-amount" id="inv-wool">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-wool">Sat (+5 TL)</button>
+                    </div>
+
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">🥛</div>
+                            <div class="inv-details">
+                                <span class="inv-name">Süt (İnek)</span>
+                                <span class="inv-amount" id="inv-milk">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-milk">Sat (+8 TL)</button>
+                    </div>
+
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">🥛</div>
+                            <div class="inv-details">
+                                <span class="inv-name">Süt (Keçi)</span>
+                                <span class="inv-amount" id="inv-goat-milk">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-goat-milk">Sat (+12 TL)</button>
+                    </div>
+
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">🥣</div>
+                            <div class="inv-details">
+                                <span class="inv-name">Süt (Manda)</span>
+                                <span class="inv-amount" id="inv-buffalo-milk">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-buffalo-milk">Sat (+25 TL)</button>
+                    </div>
+
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">📜</div>
+                            <div class="inv-details">
+                                <span class="inv-name">Deri</span>
+                                <span class="inv-amount" id="inv-leather">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-leather">Sat (+45 TL)</button>
+                    </div>
+
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">🐎</div>
+                            <div class="inv-details">
+                                <span class="inv-name">At Yelesi</span>
+                                <span class="inv-amount" id="inv-horse-hair">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-horse-hair">Sat (+60 TL)</button>
+                    </div>
+
+                    <div class="inventory-item">
+                        <div class="inv-main">
+                            <div class="inv-icon">🥛</div>
+                            <div class="inv-details">
+                                <span class="inv-name">Eşek Sütü</span>
+                                <span class="inv-amount" id="inv-donkey-milk">0</span>
+                            </div>
+                        </div>
+                        <button class="sell-btn" id="sell-donkey-milk">Sat (+150 TL)</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
