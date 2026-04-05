@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bozkurt Kelime Avı</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <header>
+            <h1>Bozkurt Kelime Avı</h1>
+            <div id="score">Puan: 0</div>
+        </header>
+
+        <main>
+            <div id="grid-wrapper">
+                <div id="grid-container">
+                    <!-- Grid tiles will be injected here -->
+                </div>
+                <button id="submit-word">Kelimeyi Gönder</button>
+            </div>
+
+            <aside id="info-panel">
+                <div id="wolf-container">
+                    <div id="wolf-status">🐺 <span id="wolf-speech">Bozkır seni bekliyor!</span></div>
+                </div>
+                <h3>Bozkırın Ruhu</h3>
+                <div id="meaning-box">
+                    <h4>Anlam:</h4>
+                    <p id="word-meaning">Kelime seçerek anlamını öğrenin.</p>
+                </div>
+                <div id="last-words">
+                    <h4>Son Kelimeler:</h4>
+                    <ul id="word-list"></ul>
+                </div>
+            </aside>
+        </main>
+
+        <footer>
+            <p>Antik Orta Asya Destanı</p>
+        </footer>
+    </div>
+    <script src="dictionary.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>
