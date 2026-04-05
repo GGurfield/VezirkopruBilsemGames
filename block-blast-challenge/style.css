@@ -1,0 +1,382 @@
+:root {
+    --bg-color: #050505;
+    --grid-bg: rgba(20, 20, 20, 0.6);
+    --grid-border: rgba(255, 255, 255, 0.05);
+    --block-color: #ffffff;
+    --block-glow: rgba(255, 255, 255, 0.2);
+    --text-color: #ffffff;
+    --ui-bg: rgba(10, 10, 10, 0.8);
+    --accent-color: #aaaaaa;
+
+    --cell-size: 45px;
+    /* Adjust via JS for responsiveness later if needed */
+    --grid-gap: 2px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #000;
+    color: var(--text-color);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    max-height: 900px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    transition: background-color 2s ease;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+/* --- Layout & UI --- */
+#ui-header {
+    flex: 0 0 100px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 10;
+}
+
+.score-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.score-label {
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+}
+
+#score-display {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--block-glow);
+    transition: transform 0.1s, color 0.5s;
+}
+
+.theme-indicator {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.high-score-container {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.high-score-label {
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+    opacity: 0.7;
+}
+
+#high-score-display {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+#current-theme-name {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.progress-bar-container {
+    width: 100px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#theme-progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--block-color);
+    transition: width 0.3s ease;
+}
+
+/* --- Main Grid --- */
+#main-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(8, var(--cell-size));
+    grid-template-rows: repeat(8, var(--cell-size));
+    gap: var(--grid-gap);
+    background: var(--grid-bg);
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid var(--grid-border);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.grid-cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.grid-cell.filled {
+    background-color: var(--block-color);
+    box-shadow: 0 0 8px var(--block-glow);
+}
+
+.grid-cell.hovered {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Animations for clearing lines */
+@keyframes clearLine {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        background-color: #fff;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+        box-shadow: 0 0 20px #fff;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.grid-cell.clearing {
+    animation: clearLine 0.4s forwards;
+}
+
+/* --- Spawner --- */
+#spawner-area {
+    flex: 0 0 150px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.spawner-slot {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.shape-container {
+    position: relative;
+    cursor: grab;
+    transition: transform 0.1s ease;
+}
+
+.shape-container:active {
+    cursor: grabbing;
+}
+
+.shape-container.dragging {
+    position: absolute;
+    pointer-events: none;
+    /* Let events pass through to grid */
+    z-index: 100;
+    transition: none;
+    /* Remove transition during drag for 1:1 follow */
+    filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.4));
+}
+
+.shape-block {
+    position: absolute;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: var(--block-color);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 8px var(--block-glow);
+}
+
+/* Anti-Gravity Mode floats the piece to its spot */
+.anti-gravity-drop {
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s !important;
+}
+
+/* --- Overlays & Backgrounds --- */
+#background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#interactive-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 15;
+    /* Above grid and main-area */
+    pointer-events: none;
+}
+
+#interactive-layer>* {
+    pointer-events: auto;
+}
+
+#effects-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#game-over-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+#game-over-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#game-over-title {
+    font-size: 3rem;
+    color: #ff3333;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255, 50, 50, 0.5);
+}
+
+#game-over-reason {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.final-score {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+#restart-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+}
+
+#restart-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Cinematic Game Over Effects */
+@keyframes blackholeCollapse {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+        filter: blur(0px);
+    }
+
+    50% {
+        transform: scale(0.5) rotate(180deg);
+        opacity: 0.8;
+        border-radius: 50%;
+        filter: blur(10px) drop-shadow(0 0 50px #e879f9);
+    }
+
+    100% {
+        transform: scale(0) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+        filter: blur(20px);
+    }
+}
+
+.anim-blackhole {
+    animation: blackholeCollapse 3s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+}
+
+/* Theme Classes (to be expanded in phase 2) */
+.theme-void {
+    --bg-color: #050505;
+    --grid-bg: rgba(20, 20, 20, 0.6);
+    --block-color: #e0e0e0;
+    --block-glow: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+    :root {
+        --cell-size: 40px;
+    }
+}
