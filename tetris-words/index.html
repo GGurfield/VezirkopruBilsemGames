@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris Word Game</title>
+    <!-- Modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Main Menu Overlay -->
+      <div id="main-menu" class="glass-panel">
+        <h1 class="game-title">TETRIS<br><span style="color:var(--neon-pink)">WORDS</span></h1>
+        <div class="menu-buttons">
+          <button id="btn-en-en" class="glass-btn mode-btn">English &rarr; English</button>
+          <button id="btn-en-tr" class="glass-btn mode-btn">English &rarr; Turkish</button>
+          <button id="btn-tr-tr" class="glass-btn mode-btn">Turkish &rarr; Turkish</button>
+          <button id="btn-tr-en" class="glass-btn mode-btn">Turkish &rarr; English</button>
+        </div>
+      </div>
+
+      <div id="score-container">
+        <button id="back-menu-btn" class="glass-btn sm-btn">&larr; MENU</button>
+        <h2>SCORE <span id="score">0</span></h2>
+        <div style="width: 80px;"></div>
+      </div>
+
+      <div class="top-layout">
+        <div class="board-wrapper glass-panel">
+          <canvas id="tetris-canvas" width="300" height="600"></canvas>
+          <div id="game-over-overlay" class="hidden">
+            <h2>GAME OVER</h2>
+            <button id="restart-btn">Try Again</button>
+          </div>
+        </div>
+
+        <div class="side-panel glass-panel">
+          <div class="incoming-piece">
+            <h3>Next Piece</h3>
+            <canvas id="next-piece-canvas" width="120" height="120"></canvas>
+          </div>
+          <div class="word-history">
+            <h3>Made Words</h3>
+            <div id="word-history-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="middle-hub glass-panel">
+        <div class="timer-wrapper">
+          <div id="timer-bar"></div>
+        </div>
+        <div class="word-display-wrapper">
+          <span id="current-word-display"></span><span class="cursor">_</span>
+        </div>
+      </div>
+
+      <div class="bottom-layout">
+        <div class="submit-area">
+          <button id="submit-btn" class="glass-btn primary-btn">SUBMIT</button>
+          <button id="backspace-btn" class="glass-btn warn-btn">DELETE</button>
+        </div>
+
+        <div class="keyboard-area" id="keyboard">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="controls-area glass-panel">
+          <button id="btn-rotate" class="control-btn glass-btn">⟳ Rotate</button>
+          <div class="d-pad">
+            <button id="btn-left" class="control-btn glass-btn">⬅</button>
+            <button id="btn-down" class="control-btn glass-btn">⬇</button>
+            <button id="btn-right" class="control-btn glass-btn">➡</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="./audio.js"></script>
+    <script src="./dictionary.js"></script>
+    <script src="./keyboard.js"></script>
+    <script src="./tetris.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
