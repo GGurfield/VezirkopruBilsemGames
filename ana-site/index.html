@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vezirköprü BİLSEM Gaming</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="logo">
+                <i class="ph-fill ph-game-controller"></i>
+                <h1>Vezirköprü <span>BİLSEM</span> Gaming</h1>
+            </div>
+            <nav>
+                <a href="#" class="active">Oyunlar</a>
+                <a href="#">Hakkımızda</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Öğrencilerimizin Hayal Gücü, <br><span class="gradient-text">Senin Ekranda!</span></h2>
+                <p>Vezirköprü BİLSEM öğrencilerinin kendi yazdığı HTML tabanlı oyunları keşfet, oyna, beğen ve yorumla!</p>
+            </div>
+        </section>
+
+        <!-- Games Grid -->
+        <main class="games-section">
+            <div class="section-header">
+                <h3>Trend Oyunlar</h3>
+                <div class="filters">
+                    <button class="filter-btn active">Tümü</button>
+                    <button class="filter-btn">En Çok Beğenilenler</button>
+                    <button class="filter-btn">Yeni Eklenenler</button>
+                </div>
+            </div>
+
+            <div class="grid-container" id="games-grid">
+                <!-- Oyun Kartları JS Tarafından Buraya Eklenecek -->
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2026 Vezirköprü BİLSEM. Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
+
+    <!-- Oynatıcı Modalı (Iframe) -->
+    <div class="modal-overlay" id="play-modal">
+        <div class="modal-content play-modal-content">
+            <div class="modal-header">
+                <h3 id="play-modal-title">Oyun Adı</h3>
+                <button class="close-btn" onclick="closePlayModal()"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="iframe-container">
+                <iframe id="game-iframe" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn like-btn" id="modal-like-btn" onclick="toggleLikeFromModal()">
+                    <i class="ph ph-heart"></i>
+                    <span id="modal-like-count">0</span>
+                </button>
+                <button class="action-btn" onclick="openCommentsFromModal()">
+                    <i class="ph ph-chat-circle"></i>
+                    <span>Yorumlar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Yorumlar Modalı -->
+    <div class="modal-overlay" id="comments-modal">
+        <div class="modal-content comments-modal-content">
+            <div class="modal-header">
+                <h3>Yorumlar (<span id="comments-count">0</span>)</h3>
+                <button class="close-btn" onclick="closeCommentsModal()"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="comments-list" id="comments-list">
+                <!-- Yorumlar JS ile eklenecek -->
+            </div>
+            <div class="comment-input-area">
+                <input type="text" id="comment-input" placeholder="Oyun hakkında bir yorum yaz..." autocomplete="off">
+                <button class="send-comment-btn" onclick="submitComment()"><i class="ph-fill ph-paper-plane-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
